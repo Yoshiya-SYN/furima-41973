@@ -12,6 +12,9 @@
 | firstname_kana     | string | null: false               |
 | birth_date         | date   | null: false               |
 
+### Association
+has_many :products
+has_many :orders
 
 ## products テーブル
 
@@ -27,25 +30,36 @@
 | price         | integer    | null: false                    |
 | user          | references | null: false, foreign_key: true |
 
+### Association
+belongs_to :user
+has_one    :order
 
-## purchases テーブル
+
+## orders テーブル
+
+| Column     | Type       | Options                                      |
+| ---------- | ---------- | -------------------------------------------- |
+| product    | references | null: false, foreign_key: true, unique: true |
+| user       | references | null: false, foreign_key: true               |
+
+
+### Association
+belongs_to :user
+has_one    :product
+has_one    :address
+
+
+## addresses テーブル
 
 | Column     | Type       | Options                        |
 | ---------- | ---------- | ------------------------------ |
-| product    | references | null: false, foreign_key: true |
-| user       | references | null: false, foreign_key: true |
-| address    | references | null: false, foreign_key: true |
-
-
-## address テーブル
-
-| Column     | Type       | Options                        |
-| ---------- | ---------- | ------------------------------ |
-| zipcode    | integer    | null: false                    |
+| zipcode    | string     | null: false                    |
 | prefecture | integer    | null: false                    |
 | city       | string     | null: false                    |
 | street     | string     | null: false                    |
 | building   | string     |                                |
-| phone      | integer    | null: false                    |
-| address    | references | null: false, foreign_key: true |
+| phone      | string     | null: false                    |
+| order      | references | null: false, foreign_key: true |
 
+### Association
+has_one :order
