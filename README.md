@@ -38,10 +38,10 @@ has_one    :order
 
 ## orders テーブル
 
-| Column     | Type       | Options                                      |
-| ---------- | ---------- | -------------------------------------------- |
-| product    | references | null: false, foreign_key: true, unique: true |
-| user       | references | null: false, foreign_key: true               |
+| Column     | Type       | Options                        |
+| ---------- | ---------- | ------------------------------ |
+| product    | references | null: false, foreign_key: true |
+| user       | references | null: false, foreign_key: true |
 
 
 ### Association
