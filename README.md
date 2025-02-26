@@ -32,11 +32,20 @@
 
 | Column     | Type       | Options                        |
 | ---------- | ---------- | ------------------------------ |
+| product    | references | null: false, foreign_key: true |
+| user       | references | null: false, foreign_key: true |
+| address    | references | null: false, foreign_key: true |
+
+
+## address テーブル
+
+| Column     | Type       | Options                        |
+| ---------- | ---------- | ------------------------------ |
 | zipcode    | integer    | null: false                    |
 | prefecture | integer    | null: false                    |
 | city       | string     | null: false                    |
 | street     | string     | null: false                    |
 | building   | string     |                                |
 | phone      | integer    | null: false                    |
-| product    | references | null: false, foreign_key: true |
-| user       | references | null: false, foreign_key: true |
+| address    | references | null: false, foreign_key: true |
+
