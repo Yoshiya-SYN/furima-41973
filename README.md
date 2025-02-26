@@ -6,6 +6,7 @@
 | ------------------ | ------ | ------------------------- |
 | email              | string | null: false, unique: true |
 | encrypted_password | string | null: false               |
+| nickname           | string | null: false               |
 | lastname           | string | null: false               |
 | firstname          | string | null: false               |
 | lastname_kana      | string | null: false               |
@@ -18,17 +19,17 @@ has_many :orders
 
 ## products テーブル
 
-| Column        | Type       | Options                        |
-| ------------- | ---------- | ------------------------------ |
-| title         | string     | null: false                    |
-| description   | text       | null: false                    |
-| category      | integer    | null: false                    |
-| condition     | integer    | null: false, foreign_key: true |
-| shipping_fee  | integer    | null: false                    |
-| prefecture    | integer    | null: false                    |
-| shipping_date | integer    | null: false                    |
-| price         | integer    | null: false                    |
-| user          | references | null: false, foreign_key: true |
+| Column           | Type       | Options                        |
+| ---------------- | ---------- | ------------------------------ |
+| title            | string     | null: false                    |
+| description      | text       | null: false                    |
+| category_id      | integer    | null: false                    |
+| condition_id     | integer    | null: false                    |
+| shipping_fee_id  | integer    | null: false                    |
+| prefecture_id    | integer    | null: false                    |
+| shipping_date_id | integer    | null: false                    |
+| price            | integer    | null: false                    |
+| user             | references | null: false, foreign_key: true |
 
 ### Association
 belongs_to :user
@@ -45,21 +46,21 @@ has_one    :order
 
 ### Association
 belongs_to :user
-has_one    :product
+belongs_to :product
 has_one    :address
 
 
 ## addresses テーブル
 
-| Column     | Type       | Options                        |
-| ---------- | ---------- | ------------------------------ |
-| zipcode    | string     | null: false                    |
-| prefecture | integer    | null: false                    |
-| city       | string     | null: false                    |
-| street     | string     | null: false                    |
-| building   | string     |                                |
-| phone      | string     | null: false                    |
-| order      | references | null: false, foreign_key: true |
+| Column        | Type       | Options                        |
+| ------------- | ---------- | ------------------------------ |
+| zipcode       | string     | null: false                    |
+| prefecture_id | integer    | null: false                    |
+| city          | string     | null: false                    |
+| street        | string     | null: false                    |
+| building      | string     |                                |
+| phone         | string     | null: false                    |
+| order         | references | null: false, foreign_key: true |
 
 ### Association
-has_one :order
+belongs_to :order
