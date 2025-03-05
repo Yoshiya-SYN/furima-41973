@@ -85,17 +85,17 @@ RSpec.describe Product, type: :model do
       it '価格は半角数値のみ保存可能であること' do
         @product.price = '１００００'
         @product.valid?
-        expect(@product.errors.full_messages).to include "Price is not a number"
+        expect(@product.errors.full_messages).to include 'Price is not a number'
       end
       it '価格は300円未満では出品できないこと' do
         @product.price = '100'
         @product.valid?
-        expect(@product.errors.full_messages).to include "Price must be greater than or equal to 300"
+        expect(@product.errors.full_messages).to include 'Price must be greater than or equal to 300'
       end
       it '価格は10000000円以上では出品できないこと' do
         @product.price = '10000000'
         @product.valid?
-        expect(@product.errors.full_messages).to include "Price must be less than or equal to 9999999"
+        expect(@product.errors.full_messages).to include 'Price must be less than or equal to 9999999'
       end
     end
   end
