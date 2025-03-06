@@ -2,6 +2,7 @@ class ProductsController < ApplicationController
   before_action :move_to_login, only: [:new]
 
   def index
+    @product = Product.all.order('created_at DESC')
   end
 
   def new
