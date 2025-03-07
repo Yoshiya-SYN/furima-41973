@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
   before_action :move_to_login, only: [:new, :edit]
-  before_action :set_product, only:[:edit]
+  before_action :set_product, only: [:edit]
   before_action :move_to_index, only: [:edit]
 
   def index
@@ -55,8 +55,8 @@ class ProductsController < ApplicationController
   end
 
   def move_to_index
-    if user_signed_in? && current_user.id != @product.user_id
-      redirect_to root_path
-    end
+    return unless user_signed_in? && current_user.id != @product.user_id
+
+    redirect_to root_path
   end
 end
