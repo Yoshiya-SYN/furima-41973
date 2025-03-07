@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  before_action :move_to_login, only: [:new, :edit]
+  before_action :move_to_login, only: [:new, :edit, :destroy]
   before_action :set_product, only: [:edit, :show, :update, :destroy]
   before_action :move_to_index, only: [:edit]
 
@@ -35,10 +35,12 @@ class ProductsController < ApplicationController
   end
 
   def destroy
-    return unless user_signed_in? && current_user.id == @product.user_id
-
-    @product.destroy
-    redirect_to root_path
+    if current_user.id == @product.user_id
+      @product.destroy
+      redirect_to root_path
+    else
+      redirect_to root_path
+    end
   end
 
   private
