@@ -1,5 +1,7 @@
 class ProductsController < ApplicationController
-  before_action :move_to_login, only: [:new]
+  before_action :move_to_login, only: [:new, :edit]
+  before_action :set_product, only: [:edit, :show, :update]
+  before_action :move_to_index, only: [:edit]
 
   def index
     @product = Product.all.order('created_at DESC')
@@ -19,7 +21,17 @@ class ProductsController < ApplicationController
   end
 
   def show
-    @product = Product.find(params[:id])
+  end
+
+  def edit
+  end
+
+  def update
+    if @product.update(product_params)
+      redirect_to product_path(@product.id)
+    else
+      render :edit, status: :unprocessable_entity
+    end
   end
 
   private
@@ -33,5 +45,15 @@ class ProductsController < ApplicationController
     return if user_signed_in?
 
     redirect_to new_user_session_path
+  end
+
+  def set_product
+    @product = Product.find(params[:id])
+  end
+
+  def move_to_index
+    return unless user_signed_in? && current_user.id != @product.user_id
+
+    redirect_to root_path
   end
 end
