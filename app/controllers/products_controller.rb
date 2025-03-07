@@ -1,5 +1,7 @@
 class ProductsController < ApplicationController
-  before_action :move_to_login, only: [:new]
+  before_action :move_to_login, only: [:new, :edit]
+  before_action :set_product, only:[:edit]
+  before_action :move_to_index, only: [:edit]
 
   def index
     @product = Product.all.order('created_at DESC')
@@ -46,5 +48,15 @@ class ProductsController < ApplicationController
     return if user_signed_in?
 
     redirect_to new_user_session_path
+  end
+
+  def set_product
+    @product = Product.find(params[:id])
+  end
+
+  def move_to_index
+    if user_signed_in? && current_user.id != @product.user_id
+      redirect_to root_path
+    end
   end
 end
