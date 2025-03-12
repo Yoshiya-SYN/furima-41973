@@ -60,7 +60,6 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
   end
 
-
   def move_to_index
     if user_signed_in? && current_user.id != @product.user_id
       redirect_to root_path
@@ -68,5 +67,4 @@ class ProductsController < ApplicationController
       redirect_to root_path
     end
   end
-
 end
