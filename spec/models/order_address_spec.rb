@@ -6,7 +6,7 @@ RSpec.describe OrderAddress, type: :model do
     sleep(1)
     product = FactoryBot.create(:product)
     sleep(1)
-    @order_address = FactoryBot.build(:order_address, user_id: user.id, product_id: product.id )
+    @order_address = FactoryBot.build(:order_address, user_id: user.id, product_id: product.id)
   end
 
   describe '購入情報の保存' do
