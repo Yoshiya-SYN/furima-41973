@@ -3,7 +3,7 @@ class OrderAddress
   attr_accessor :user_id, :product_id, :zipcode, :prefecture_id, :city, :street, :building, :phone, :token, :price
 
   with_options presence: true do
-    validates :user_id, :token, :city, :street
+    validates :user_id, :token, :product_id, :city, :street
     validates :zipcode, format: { with: /\A[0-9]{3}-[0-9]{4}\z/, message: 'is invalid. Enter it as follows (e.g. 123-4567)' }
     validates :phone, length: {
       minimum: 10,

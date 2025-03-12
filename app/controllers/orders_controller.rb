@@ -1,6 +1,7 @@
 class OrdersController < ApplicationController
   before_action :set_product
   before_action :move_to_index, only: [:index]
+  before_action :authenticate_user!, only: [:index]
 
   def index
     gon.public_key = ENV['PAYJP_PUBLIC_KEY']
@@ -50,8 +51,6 @@ class OrdersController < ApplicationController
       redirect_to root_path
     elsif user_signed_in? && current_user.id == @product.user_id
       redirect_to root_path
-    elsif !user_signed_in?
-      redirect_to new_user_session_path
     end
   end
 end
