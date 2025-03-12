@@ -1,14 +1,11 @@
 class OrdersController < ApplicationController
   before_action :set_product
-  before_action :move_to_index, only: [:index]
   before_action :authenticate_user!, only: [:index]
+  before_action :move_to_index, only: [:index]
+  
 
   def index
     gon.public_key = ENV['PAYJP_PUBLIC_KEY']
-    @order_address = OrderAddress.new
-  end
-
-  def new
     @order_address = OrderAddress.new
   end
 
@@ -47,9 +44,7 @@ class OrdersController < ApplicationController
   end
 
   def move_to_index
-    if user_signed_in? && current_user.id != @product.user_id && @product.order.present?
-      redirect_to root_path
-    elsif user_signed_in? && current_user.id == @product.user_id
+    if current_user.id == @product.user_id || @product.order.present?
       redirect_to root_path
     end
   end
