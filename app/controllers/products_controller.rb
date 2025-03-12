@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  before_action :move_to_login, only: [:new, :edit, :destroy]
+  before_action :authenticate_user!, only: [:new, :edit, :destroy]
   before_action :set_product, only: [:edit, :show, :update, :destroy]
   before_action :move_to_index, only: [:edit]
 
@@ -50,18 +50,12 @@ class ProductsController < ApplicationController
                                     :shipping_date_id, :price).merge(user_id: current_user.id)
   end
 
-  def move_to_login
-    return if user_signed_in?
-
-    redirect_to new_user_session_path
-  end
-
   def set_product
     @product = Product.find(params[:id])
   end
 
   def move_to_index
-    return unless user_signed_in? && current_user.id != @product.user_id
+    return unless current_user.id != @product.user_id || @product.order.present?
 
     redirect_to root_path
   end
